@@ -1,0 +1,10 @@
+*
+!*/
+
+!.gitignore
+
+!*.sln
+!*.csproj
+!*.cs
+bin/
+obj/
