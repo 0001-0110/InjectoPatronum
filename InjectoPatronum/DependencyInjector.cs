@@ -68,7 +68,7 @@ namespace InjectoPatronum
 			// Go through each remaining argument to check that they have the correct type
 			int argumentIndex;
 			for (argumentIndex = 0; dependencyIndex + argumentIndex < parameters.Length && argumentIndex < argumentTypes.Length; argumentIndex++)
-				if (parameters[dependencyIndex + argumentIndex].ParameterType != argumentTypes[argumentIndex])
+				if (argumentTypes[argumentIndex].IsInstanceOfType(parameters[dependencyIndex + argumentIndex].ParameterType))
 					return false;
 
 			// Check that the number of argument needed is the same as the number given
@@ -171,6 +171,7 @@ namespace InjectoPatronum
 			return bestMethod?.Invoke(null, AddDependencies(bestMethod, arguments));
 		}
 
+		/// <inheritedoc/>
 		private object? Execute(object instance, MethodInfo methodInfo, object[] arguments)
 		{
 			MethodBase? bestMethod = GetBestMethod(instance.GetType(), methodInfo, BindingFlags.Instance | BindingFlags.Public, arguments.Select(arg => arg.GetType()).ToArray());
