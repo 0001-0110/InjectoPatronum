@@ -8,6 +8,8 @@
 
 		IDependencyInjector MapSingleton<TInterface, TImplementation>() where TInterface : class where TImplementation : TInterface;
 
+        IDependencyInjector MapSingleton<TInterface, TImplementation>(params object[] arguments) where TInterface : class where TImplementation : TInterface;
+
 		IDependencyInjector MapSingleton<TInterface, TImplementation>(TImplementation singleton) where TInterface : class where TImplementation : TInterface;
 
 		object? Instantiate(Type type, params object[] arguments);
