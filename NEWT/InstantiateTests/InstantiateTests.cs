@@ -29,7 +29,7 @@ namespace NEWT.InstantiateTests
         [DataRow(typeof(ITwoDependencyWithDependenciesClass), typeof(TwoDependencyWithDependenciesClass))]
         public void TestDependencyInjectionWithoutArguments(Type @interface, Type implementation)
         {
-            object? result = injector.Instantiate(implementation, Array.Empty<object>());
+            object? result = injector.Instantiate(implementation, []);
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, @interface);
             Assert.IsTrue(((ITestClass)result).Dependencies.All(dependency => dependency != null));
