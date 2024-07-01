@@ -26,9 +26,7 @@ namespace InjectoPatronum
 
         public IDependencyInjector MapSingleton<TInterface, TImplementation>(params object[] arguments) where TInterface : class where TImplementation : TInterface
         {
-            TImplementation instance = Instantiate<TImplementation>(arguments)
-                ?? throw new Exception("This singleton instance could not be created. Check that all of its dependencies have been mapped beforehand and that there is a valid constructor.");
-            return MapSingleton<TInterface, TImplementation>(instance);
+            return MapSingleton<TInterface, TImplementation>(Instantiate<TImplementation>(arguments);
         }
 
         // This overload allows for the instance to be created manually
