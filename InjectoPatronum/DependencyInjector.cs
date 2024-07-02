@@ -18,6 +18,12 @@ namespace InjectoPatronum
 
         #region Map
 
+        public IDependencyInjector Map<TImplementation>() where TImplementation : class
+        {
+            // Map a class to itself
+            return Map<TImplementation, TImplementation>();
+        }
+
         public IDependencyInjector Map<TInterface, TImplementation>() where TInterface : class where TImplementation : TInterface
         {
             _mappings.Add(new Mapping(typeof(TInterface), typeof(TImplementation)));
