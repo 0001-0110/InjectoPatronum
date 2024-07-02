@@ -19,7 +19,8 @@ namespace NEWT.InstantiateTests
                 .Map<ITwoDependencyWithDependenciesClass, TwoDependencyWithDependenciesClass>()
                 .Map<INoDependencyWithArgsClass, NoDependencyWithArgsClass>()
                 .Map<IOneDependencyWithArgsClass, OneDependencyWithArgsClass>()
-                .Map<IOneDependencyWithDependenciesAndArgsClass, OneDependencyWithDependenciesAndArgsClass>();
+                .Map<IOneDependencyWithDependenciesAndArgsClass, OneDependencyWithDependenciesAndArgsClass>()
+                .MapGeneric(typeof(IGenericInterface<>), typeof(GenericClass<>));
         }
 
         [TestMethod]
@@ -48,6 +49,20 @@ namespace NEWT.InstantiateTests
         [DataRow(typeof(IOneDependencyWithDependenciesAndArgsClass), typeof(OneDependencyWithDependenciesAndArgsClass), false, true)]
         [DataRow(typeof(IOneDependencyWithDependenciesAndArgsClass), typeof(OneDependencyWithDependenciesAndArgsClass), 10f)]
         public void TestDependencyIjectionWithArgumengts(Type @interface, Type implementation, params object[] arguments)
+        {
+            object? result = injector.Instantiate(implementation, arguments);
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, @interface);
+            Assert.IsTrue(((ITestClass)result).Dependencies.All(dependency => dependency != null));
+            foreach (object dependency in ((ITestClass)result).Dependencies)
+                Assert.IsTrue(((ITestClass)dependency).Dependencies.All(dependency => dependency != null));
+            Assert.IsTrue(arguments.All(arg => ((ITestClassWithArgs)result).Arguments.Contains(arg)));
+        }
+
+        [TestMethod]
+        [DataRow(typeof(IGenericInterface<int>), typeof(GenericClass<int>))]
+        [DataRow(typeof(IGenericInterface<string>), typeof(GenericClass<string>))]
+        public void TestGenericDefinitionDependency(Type @interface, Type implementation, params object[] arguments)
         {
             object? result = injector.Instantiate(implementation, arguments);
             Assert.IsNotNull(result);

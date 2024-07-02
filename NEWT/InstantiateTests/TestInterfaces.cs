@@ -23,4 +23,6 @@
     internal interface IOneDependencyWithArgsClass : ITestClass { }
 
     internal interface IOneDependencyWithDependenciesAndArgsClass : ITestClass { }
+
+    internal interface IGenericInterface<T> : ITestClass { }
 }

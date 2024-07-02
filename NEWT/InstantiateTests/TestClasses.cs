@@ -78,5 +78,10 @@ namespace NEWT.InstantiateTests
     }
 
     #endregion
+
+    internal class GenericClass<T> : TestClass, IGenericInterface<T>
+    {
+        public GenericClass() { }
+    }
 }
 #pragma warning restore IDE0290 // Use primary constructor
