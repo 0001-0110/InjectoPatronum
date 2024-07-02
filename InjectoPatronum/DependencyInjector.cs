@@ -18,9 +18,9 @@ namespace InjectoPatronum
 
         #region Map
 
-        public IDependencyInjector Map<TInterface, TImplementation>(params object[] arguments) where TInterface : class where TImplementation : TInterface
+        public IDependencyInjector Map<TInterface, TImplementation>() where TInterface : class where TImplementation : TInterface
         {
-            _mappings.Add(new Mapping(typeof(TInterface), typeof(TImplementation), arguments));
+            _mappings.Add(new Mapping(typeof(TInterface), typeof(TImplementation)));
             return this;
         }
 
@@ -36,9 +36,9 @@ namespace InjectoPatronum
             return this;
         }
 
-        public IDependencyInjector MapGeneric(Type @interface, Type implementation, params object[] arguments)
+        public IDependencyInjector MapGeneric(Type @interface, Type implementation)
         {
-            _mappings.Add(new GenericMapping(@interface, implementation, arguments));
+            _mappings.Add(new GenericMapping(@interface, implementation));
             return this;
         }
 

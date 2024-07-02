@@ -19,9 +19,9 @@
             return _mappings.Any(mapping => mapping.IsOfType(@interface));
         }
 
-        public object? GetInstanceFor(IDependencyInjector injector, Type @interface)
+        public object? GetInstanceFor(IDependencyInjector injector, Type @interface, params object[] arguments)
         {
-            return _mappings.SingleOrDefault(mapping => mapping.IsOfType(@interface))?.GetInstance(injector, @interface) ??
+            return _mappings.SingleOrDefault(mapping => mapping.IsOfType(@interface))?.GetInstance(injector, @interface, arguments) ??
                 throw new KeyNotFoundException("This type has not been mapped to any implementation");
         }
     }

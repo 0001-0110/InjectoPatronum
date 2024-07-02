@@ -4,6 +4,6 @@
     {
         bool IsOfType(Type @interface);
 
-        object? GetInstance(IDependencyInjector injector, Type @interface);
+        object? GetInstance(IDependencyInjector injector, Type @interface, object[] arguments);
     }
 }

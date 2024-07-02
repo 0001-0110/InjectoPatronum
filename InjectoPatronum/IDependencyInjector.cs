@@ -2,13 +2,14 @@
 {
 	public interface IDependencyInjector
 	{
-		IDependencyInjector Map<TInterface, TImplementation>(params object[] arguments) where TInterface : class where TImplementation : TInterface;
+		IDependencyInjector Map<TInterface, TImplementation>() where TInterface : class where TImplementation : TInterface;
 
+		// Arguments have to be passed during the mapping since the instance will be created as soon as the mapping is done
 		IDependencyInjector MapSingleton<TInterface, TImplementation>(params object[] arguments) where TInterface : class where TImplementation : TInterface;
 
 		IDependencyInjector MapSingleton<TInterface, TImplementation>(TImplementation singleton) where TInterface : class where TImplementation : TInterface;
 
-		IDependencyInjector MapGeneric(Type @interface, Type type, params object[] arguments);
+		IDependencyInjector MapGeneric(Type @interface, Type type);
 
 		object? Instantiate(Type type, params object[] arguments);
 		

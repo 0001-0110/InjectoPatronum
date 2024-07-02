@@ -16,8 +16,11 @@
             return @interface == _interface;
         }
 
-        public object? GetInstance(IDependencyInjector injector, Type @interface)
+        public object? GetInstance(IDependencyInjector injector, Type @interface, params object[] arguments)
         {
+            if (arguments.Length > 0)
+                throw new ArgumentException("Arguments cannot be passed when calling a singleton");
+
             return _instance;
         }
     }
