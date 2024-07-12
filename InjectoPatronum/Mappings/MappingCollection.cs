@@ -6,7 +6,7 @@
 
         public MappingCollection()
         {
-            _mappings = new List<IMapping>();
+            _mappings = [];
         }
 
         public void Add(IMapping mapping)

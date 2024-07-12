@@ -16,40 +16,6 @@ namespace InjectoPatronum
             MapSingleton<IDependencyInjector, DependencyInjector>(this);
         }
 
-        #region Map
-
-        public IDependencyInjector Map<TImplementation>() where TImplementation : class
-        {
-            // Map a class to itself
-            return Map<TImplementation, TImplementation>();
-        }
-
-        public IDependencyInjector Map<TInterface, TImplementation>() where TInterface : class where TImplementation : TInterface
-        {
-            _mappings.Add(new Mapping(typeof(TInterface), typeof(TImplementation)));
-            return this;
-        }
-
-        public IDependencyInjector MapSingleton<TInterface, TImplementation>(params object[] arguments) where TInterface : class where TImplementation : TInterface
-        {
-            return MapSingleton<TInterface, TImplementation>(Instantiate<TImplementation>(arguments));
-        }
-
-        // This overload allows for the instance to be created manually
-        public IDependencyInjector MapSingleton<TInterface, TImplementation>(TImplementation singleton) where TInterface : class where TImplementation : TInterface
-        {
-            _mappings.Add(new SingletonMapping(typeof(TInterface), singleton));
-            return this;
-        }
-
-        public IDependencyInjector MapGeneric(Type @interface, Type implementation)
-        {
-            _mappings.Add(new GenericMapping(@interface, implementation));
-            return this;
-        }
-
-        #endregion
-
         // TODO This is functionnal but kind of ugly, might need some work to make this code prettier
         private bool IsSuitableMethod(MethodBase method, Type[] argumentTypes)
         {
@@ -116,14 +82,243 @@ namespace InjectoPatronum
             return GetDependencies(requiredArguments.Take(requiredArguments.Length - arguments.Length)).Cast<object>().Concat(arguments).ToArray();
         }
 
-        #region Instantiate
-
         private ConstructorInfo? GetBestConstructor(Type type, Type[] argumentTypes)
         {
             return GetBestMethod(type.GetConstructors(BindingFlags.Instance | BindingFlags.Public), argumentTypes) as ConstructorInfo;
         }
 
-        public object? Instantiate(Type type, params object[] arguments)
+        private MethodBase? GetBestMethod(Type type, MethodInfo methodInfo, BindingFlags bindingFlags, Type[] argumentTypes)
+        {
+            return GetBestMethod(type.GetOverloads(methodInfo.Name, bindingFlags), argumentTypes);
+        }
+
+        #region Map
+
+        private DependencyInjector Map(Type implementation, params Type[] interfaces)
+        {
+            foreach (Type @interface in interfaces)
+                _mappings.Add(new Mapping(@interface, implementation));
+            return this;
+        }
+
+        public IDependencyInjector Map<TImplementation>() where TImplementation : class
+        {
+            // Map a class to itself
+            return Map<TImplementation, TImplementation>();
+        }
+
+        public IDependencyInjector Map<TInterface, TImplementation>() where TInterface : class where TImplementation : TInterface
+        {
+            return Map(typeof(TImplementation), typeof(TInterface));
+        }
+
+        public IDependencyInjector Map<TInterface1, TInterface2, TImplementation>()
+            where TInterface1 : class
+            where TInterface2 : class
+            where TImplementation : TInterface1, TInterface2
+        {
+            return Map(typeof(TImplementation), typeof(TInterface1), typeof(TInterface2));
+        }
+
+        public IDependencyInjector Map<TInterface1, TInterface2, TInterface3, TImplementation>()
+            where TInterface1 : class
+            where TInterface2 : class
+            where TInterface3 : class
+            where TImplementation : TInterface1, TInterface2, TInterface3
+        {
+            return Map(typeof(TImplementation), typeof(TInterface1), typeof(TInterface2), typeof(TInterface3));
+        }
+
+        public IDependencyInjector Map<TInterface1, TInterface2, TInterface3, TInterface4, TImplementation>()
+            where TInterface1 : class
+            where TInterface2 : class
+            where TInterface3 : class
+            where TInterface4 : class
+            where TImplementation : TInterface1, TInterface2, TInterface3, TInterface4
+        {
+            return Map(typeof(TImplementation), typeof(TInterface1), typeof(TInterface2), typeof(TInterface3), typeof(TInterface4));
+        }
+
+        public IDependencyInjector Map<TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TImplementation>()
+            where TInterface1 : class
+            where TInterface2 : class
+            where TInterface3 : class
+            where TInterface4 : class
+            where TInterface5 : class
+            where TImplementation : TInterface1, TInterface2, TInterface3, TInterface4, TInterface5
+        {
+            return Map(typeof(TImplementation), typeof(TInterface1), typeof(TInterface2), typeof(TInterface3), typeof(TInterface4), typeof(TInterface5));
+        }
+
+        public IDependencyInjector Map<TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6, TImplementation>()
+            where TInterface1 : class
+            where TInterface2 : class
+            where TInterface3 : class
+            where TInterface4 : class
+            where TInterface5 : class
+            where TInterface6 : class
+            where TImplementation : TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6
+        {
+            return Map(typeof(TImplementation), typeof(TInterface1), typeof(TInterface2), typeof(TInterface3), typeof(TInterface4), typeof(TInterface5), typeof(TInterface6));
+        }
+
+        public IDependencyInjector Map<TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6, TInterface7, TImplementation>()
+            where TInterface1 : class
+            where TInterface2 : class
+            where TInterface3 : class
+            where TInterface4 : class
+            where TInterface5 : class
+            where TInterface6 : class
+            where TInterface7 : class
+            where TImplementation : TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6, TInterface7
+        {
+            return Map(typeof(TImplementation), typeof(TInterface1), typeof(TInterface2), typeof(TInterface3), typeof(TInterface4), typeof(TInterface5), typeof(TInterface6), typeof(TInterface7));
+        }
+
+        public IDependencyInjector Map<TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6, TInterface7, TInterface8, TImplementation>()
+            where TInterface1 : class
+            where TInterface2 : class
+            where TInterface3 : class
+            where TInterface4 : class
+            where TInterface5 : class
+            where TInterface6 : class
+            where TInterface7 : class
+            where TInterface8 : class
+            where TImplementation : TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6, TInterface7, TInterface8
+        {
+            return Map(typeof(TImplementation), typeof(TInterface1), typeof(TInterface2), typeof(TInterface3), typeof(TInterface4), typeof(TInterface5), typeof(TInterface6), typeof(TInterface7), typeof(TInterface8));
+        }
+
+        #endregion
+
+        #region MapSingleton
+
+        private DependencyInjector MapSingleton(object singleton, params Type[] interfaces)
+        {
+            foreach (Type @interface in interfaces)
+                _mappings.Add(new SingletonMapping(@interface, singleton));
+            return this;
+        }
+
+        public IDependencyInjector MapSingleton<TImplementation>(params object[] arguments)
+            where TImplementation : class
+        {
+            // Map a class to itself
+            return MapSingleton<TImplementation, TImplementation>(arguments);
+        }
+
+        public IDependencyInjector MapSingleton<TInterface, TImplementation>(params object[] arguments) 
+            where TInterface : class 
+            where TImplementation : TInterface
+        {
+            return MapSingleton<TInterface, TImplementation>(Instantiate<TImplementation>(arguments));
+        }
+
+        // This overload allows for the instance to be created manually
+        public IDependencyInjector MapSingleton<TInterface, TImplementation>(TImplementation singleton) 
+            where TInterface : class 
+            where TImplementation : TInterface
+        {
+            return MapSingleton(singleton, typeof(TInterface));
+        }
+
+        public IDependencyInjector MapSingleton<TInterface1, TInterface2, TImplementation>(params object[] arguments)
+            where TInterface1 : class
+            where TInterface2 : class
+            where TImplementation : TInterface1, TInterface2
+        {
+            return MapSingleton(Instantiate<TImplementation>(arguments), typeof(TInterface1), typeof(TInterface2));
+        }
+
+        public IDependencyInjector MapSingleton<TInterface1, TInterface2, TInterface3, TImplementation>(params object[] arguments)
+            where TInterface1 : class
+            where TInterface2 : class
+            where TInterface3 : class
+            where TImplementation : TInterface1, TInterface2, TInterface3
+        {
+            return MapSingleton(Instantiate<TImplementation>(arguments), typeof(TInterface1), typeof(TInterface2), typeof(TInterface3));
+        }
+
+        public IDependencyInjector MapSingleton<TInterface1, TInterface2, TInterface3, TInterface4, TImplementation>(params object[] arguments)
+            where TInterface1 : class
+            where TInterface2 : class
+            where TInterface3 : class
+            where TInterface4 : class
+            where TImplementation : TInterface1, TInterface2, TInterface3, TInterface4
+        {
+            return MapSingleton(Instantiate<TImplementation>(arguments), typeof(TInterface1), typeof(TInterface2), typeof(TInterface3), typeof(TInterface4));
+        }
+
+        public IDependencyInjector MapSingleton<TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TImplementation>(params object[] arguments)
+            where TInterface1 : class
+            where TInterface2 : class
+            where TInterface3 : class
+            where TInterface4 : class
+            where TInterface5 : class
+            where TImplementation : TInterface1, TInterface2, TInterface3, TInterface4, TInterface5
+        {
+            return MapSingleton(Instantiate<TImplementation>(arguments), typeof(TInterface1), typeof(TInterface2), typeof(TInterface3), typeof(TInterface4), typeof(TInterface5));
+        }
+
+        public IDependencyInjector MapSingleton<TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6, TImplementation>(params object[] arguments)
+            where TInterface1 : class
+            where TInterface2 : class
+            where TInterface3 : class
+            where TInterface4 : class
+            where TInterface5 : class
+            where TInterface6 : class
+            where TImplementation : TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6
+        {
+            return MapSingleton(Instantiate<TImplementation>(arguments), typeof(TInterface1), typeof(TInterface2), typeof(TInterface3), typeof(TInterface4), typeof(TInterface5), typeof(TInterface6));
+        }
+
+        public IDependencyInjector MapSingleton<TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6, TInterface7, TImplementation>(params object[] arguments)
+            where TInterface1 : class
+            where TInterface2 : class
+            where TInterface3 : class
+            where TInterface4 : class
+            where TInterface5 : class
+            where TInterface6 : class
+            where TInterface7 : class
+            where TImplementation : TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6, TInterface7
+        {
+            return MapSingleton(Instantiate<TImplementation>(arguments), typeof(TInterface1), typeof(TInterface2), typeof(TInterface3), typeof(TInterface4), typeof(TInterface5), typeof(TInterface6), typeof(TInterface7));
+        }
+
+        public IDependencyInjector MapSingleton<TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6, TInterface7, TInterface8, TImplementation>(params object[] arguments)
+            where TInterface1 : class
+            where TInterface2 : class
+            where TInterface3 : class
+            where TInterface4 : class
+            where TInterface5 : class
+            where TInterface6 : class
+            where TInterface7 : class
+            where TInterface8 : class
+            where TImplementation : TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6, TInterface7, TInterface8
+        {
+            return MapSingleton(Instantiate<TImplementation>(arguments), typeof(TInterface1), typeof(TInterface2), typeof(TInterface3), typeof(TInterface4), typeof(TInterface5), typeof(TInterface6), typeof(TInterface7), typeof(TInterface8));
+        }
+
+        #endregion
+
+        #region MapGeneric
+
+        public IDependencyInjector MapGeneric(Type @interface, Type implementation)
+        {
+            _mappings.Add(new GenericMapping(@interface, implementation));
+            return this;
+        }
+
+        public IDependencyInjector MapGeneric(Type type, params Type[] interfaces)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region Instantiate
+
+        public object Instantiate(Type type, params object[] arguments)
         {
             ConstructorInfo? constructor = GetBestConstructor(type, arguments.Select(argument => argument.GetType()).ToArray());
             // Warning disabled for readability
@@ -139,22 +334,17 @@ namespace InjectoPatronum
 #pragma warning restore IDE0270 // Use coalesce 
 
             // Invoke the constructor with all the dependencies followed by all the given arguments
-            return constructor?.Invoke(AddDependencies(constructor, arguments));
+            return constructor.Invoke(AddDependencies(constructor, arguments));
         }
 
-        public T? Instantiate<T>(params object[] arguments)
+        public T Instantiate<T>(params object[] arguments)
         {
-            return (T?)Instantiate(typeof(T), arguments);
+            return (T)Instantiate(typeof(T), arguments);
         }
 
         #endregion
 
         #region Execute
-
-        private MethodBase? GetBestMethod(Type type, MethodInfo methodInfo, BindingFlags bindingFlags, Type[] argumentTypes)
-        {
-            return GetBestMethod(type.GetOverloads(methodInfo.Name, bindingFlags), argumentTypes);
-        }
 
         private object? Execute(Type type, MethodInfo methodInfo, object[] arguments)
         {
@@ -162,7 +352,6 @@ namespace InjectoPatronum
             return bestMethod?.Invoke(null, AddDependencies(bestMethod, arguments));
         }
 
-        /// <inheritedoc/>
         private object? Execute(object instance, MethodInfo methodInfo, object[] arguments)
         {
             MethodBase? bestMethod = GetBestMethod(instance.GetType(), methodInfo, BindingFlags.Instance | BindingFlags.Public, arguments.Select(arg => arg.GetType()).ToArray());
