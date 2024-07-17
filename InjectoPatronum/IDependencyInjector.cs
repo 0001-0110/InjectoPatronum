@@ -134,9 +134,68 @@
             where TInterface8 : class
             where TImplementation : TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6, TInterface7, TInterface8;
 
-        IDependencyInjector MapSingleton<TInterface, TImplementation>(TImplementation singleton) 
-            where TInterface : class 
+        IDependencyInjector MapSingleton<TImplementation>(TImplementation implementation)
+            where TImplementation : class;
+
+        IDependencyInjector MapSingleton<TInterface, TImplementation>(TImplementation implementation)
+            where TInterface : class
             where TImplementation : TInterface;
+
+        IDependencyInjector MapSingleton<TInterface1, TInterface2, TImplementation>(TImplementation implementation)
+            where TInterface1 : class
+            where TInterface2 : class
+            where TImplementation : TInterface1, TInterface2;
+
+        IDependencyInjector MapSingleton<TInterface1, TInterface2, TInterface3, TImplementation>(TImplementation implementation)
+            where TInterface1 : class
+            where TInterface2 : class
+            where TInterface3 : class
+            where TImplementation : TInterface1, TInterface2, TInterface3;
+
+        IDependencyInjector MapSingleton<TInterface1, TInterface2, TInterface3, TInterface4, TImplementation>(TImplementation implementation)
+            where TInterface1 : class
+            where TInterface2 : class
+            where TInterface3 : class
+            where TInterface4 : class
+            where TImplementation : TInterface1, TInterface2, TInterface3, TInterface4;
+
+        IDependencyInjector MapSingleton<TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TImplementation>(TImplementation implementation)
+            where TInterface1 : class
+            where TInterface2 : class
+            where TInterface3 : class
+            where TInterface4 : class
+            where TInterface5 : class
+            where TImplementation : TInterface1, TInterface2, TInterface3, TInterface4, TInterface5;
+
+        IDependencyInjector MapSingleton<TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6, TImplementation>(TImplementation implementation)
+            where TInterface1 : class
+            where TInterface2 : class
+            where TInterface3 : class
+            where TInterface4 : class
+            where TInterface5 : class
+            where TInterface6 : class
+            where TImplementation : TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6;
+
+        IDependencyInjector MapSingleton<TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6, TInterface7, TImplementation>(TImplementation implementation)
+            where TInterface1 : class
+            where TInterface2 : class
+            where TInterface3 : class
+            where TInterface4 : class
+            where TInterface5 : class
+            where TInterface6 : class
+            where TInterface7 : class
+            where TImplementation : TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6, TInterface7;
+
+        IDependencyInjector MapSingleton<TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6, TInterface7, TInterface8, TImplementation>(TImplementation implementation)
+            where TInterface1 : class
+            where TInterface2 : class
+            where TInterface3 : class
+            where TInterface4 : class
+            where TInterface5 : class
+            where TInterface6 : class
+            where TInterface7 : class
+            where TInterface8 : class
+            where TImplementation : TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6, TInterface7, TInterface8;
 
         #endregion
 

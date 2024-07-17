@@ -214,14 +214,6 @@ namespace InjectoPatronum
             return MapSingleton<TInterface, TImplementation>(Instantiate<TImplementation>(arguments));
         }
 
-        // This overload allows for the instance to be created manually
-        public IDependencyInjector MapSingleton<TInterface, TImplementation>(TImplementation singleton) 
-            where TInterface : class 
-            where TImplementation : TInterface
-        {
-            return MapSingleton(singleton, typeof(TInterface));
-        }
-
         public IDependencyInjector MapSingleton<TInterface1, TInterface2, TImplementation>(params object[] arguments)
             where TInterface1 : class
             where TInterface2 : class
@@ -297,6 +289,99 @@ namespace InjectoPatronum
             where TImplementation : TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6, TInterface7, TInterface8
         {
             return MapSingleton(Instantiate<TImplementation>(arguments), typeof(TInterface1), typeof(TInterface2), typeof(TInterface3), typeof(TInterface4), typeof(TInterface5), typeof(TInterface6), typeof(TInterface7), typeof(TInterface8));
+        }
+
+        // These overload allows for the instance to be created manually
+
+        public IDependencyInjector MapSingleton<TImplementation>(TImplementation singleton)
+            where TImplementation : class
+        {
+            // Map a class to itself
+            return MapSingleton<TImplementation, TImplementation>(singleton);
+        }
+
+        public IDependencyInjector MapSingleton<TInterface, TImplementation>(TImplementation singleton)
+            where TInterface : class
+            where TImplementation : TInterface
+        {
+            return MapSingleton(singleton, typeof(TInterface));
+        }
+
+        public IDependencyInjector MapSingleton<TInterface1, TInterface2, TImplementation>(TImplementation singleton)
+            where TInterface1 : class
+            where TInterface2 : class
+            where TImplementation : TInterface1, TInterface2
+        {
+            return MapSingleton(singleton, typeof(TInterface1), typeof(TInterface2));
+        }
+
+        public IDependencyInjector MapSingleton<TInterface1, TInterface2, TInterface3, TImplementation>(TImplementation singleton)
+            where TInterface1 : class
+            where TInterface2 : class
+            where TInterface3 : class
+            where TImplementation : TInterface1, TInterface2, TInterface3
+        {
+            return MapSingleton(singleton, typeof(TInterface1), typeof(TInterface2), typeof(TInterface3));
+        }
+
+        public IDependencyInjector MapSingleton<TInterface1, TInterface2, TInterface3, TInterface4, TImplementation>(TImplementation singleton)
+            where TInterface1 : class
+            where TInterface2 : class
+            where TInterface3 : class
+            where TInterface4 : class
+            where TImplementation : TInterface1, TInterface2, TInterface3, TInterface4
+        {
+            return MapSingleton(singleton, typeof(TInterface1), typeof(TInterface2), typeof(TInterface3), typeof(TInterface4));
+        }
+
+        public IDependencyInjector MapSingleton<TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TImplementation>(TImplementation singleton)
+            where TInterface1 : class
+            where TInterface2 : class
+            where TInterface3 : class
+            where TInterface4 : class
+            where TInterface5 : class
+            where TImplementation : TInterface1, TInterface2, TInterface3, TInterface4, TInterface5
+        {
+            return MapSingleton(singleton, typeof(TInterface1), typeof(TInterface2), typeof(TInterface3), typeof(TInterface4), typeof(TInterface5));
+        }
+
+        public IDependencyInjector MapSingleton<TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6, TImplementation>(TImplementation singleton)
+            where TInterface1 : class
+            where TInterface2 : class
+            where TInterface3 : class
+            where TInterface4 : class
+            where TInterface5 : class
+            where TInterface6 : class
+            where TImplementation : TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6
+        {
+            return MapSingleton(singleton, typeof(TInterface1), typeof(TInterface2), typeof(TInterface3), typeof(TInterface4), typeof(TInterface5), typeof(TInterface6));
+        }
+
+        public IDependencyInjector MapSingleton<TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6, TInterface7, TImplementation>(TImplementation singleton)
+            where TInterface1 : class
+            where TInterface2 : class
+            where TInterface3 : class
+            where TInterface4 : class
+            where TInterface5 : class
+            where TInterface6 : class
+            where TInterface7 : class
+            where TImplementation : TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6, TInterface7
+        {
+            return MapSingleton(singleton, typeof(TInterface1), typeof(TInterface2), typeof(TInterface3), typeof(TInterface4), typeof(TInterface5), typeof(TInterface6), typeof(TInterface7));
+        }
+
+        public IDependencyInjector MapSingleton<TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6, TInterface7, TInterface8, TImplementation>(TImplementation singleton)
+            where TInterface1 : class
+            where TInterface2 : class
+            where TInterface3 : class
+            where TInterface4 : class
+            where TInterface5 : class
+            where TInterface6 : class
+            where TInterface7 : class
+            where TInterface8 : class
+            where TImplementation : TInterface1, TInterface2, TInterface3, TInterface4, TInterface5, TInterface6, TInterface7, TInterface8
+        {
+            return MapSingleton(singleton, typeof(TInterface1), typeof(TInterface2), typeof(TInterface3), typeof(TInterface4), typeof(TInterface5), typeof(TInterface6), typeof(TInterface7), typeof(TInterface8));
         }
 
         #endregion
