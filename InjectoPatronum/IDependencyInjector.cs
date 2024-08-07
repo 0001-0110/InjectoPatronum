@@ -223,7 +223,7 @@
         /// <remarks>
         /// This is used for void methods. If you want to get the result, you have to add the return type as type argument
         /// </remarks>
-        void Execute(Type instance, Delegate @delegate, params object[] arguments);
+        void Execute(Type type, Delegate @delegate, params object[] arguments);
 
         /// <summary>
         /// Executes the static method while filling missing arguments with the mapped dependencies
@@ -231,7 +231,7 @@
         /// <returns>
         /// The result of the function casted to the type argument
         /// </returns>
-        T? Execute<T>(Type instance, Delegate @delegate, params object[] arguments);
+        T? Execute<T>(Type type, Delegate @delegate, params object[] arguments);
 
         /// <summary>
         /// Executes the instance method while filling missing arguments with the mapped dependencies

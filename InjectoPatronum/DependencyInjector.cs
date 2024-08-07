@@ -207,8 +207,8 @@ namespace InjectoPatronum
             return MapSingleton<TImplementation, TImplementation>(arguments);
         }
 
-        public IDependencyInjector MapSingleton<TInterface, TImplementation>(params object[] arguments) 
-            where TInterface : class 
+        public IDependencyInjector MapSingleton<TInterface, TImplementation>(params object[] arguments)
+            where TInterface : class
             where TImplementation : TInterface
         {
             return MapSingleton<TInterface, TImplementation>(Instantiate<TImplementation>(arguments));
