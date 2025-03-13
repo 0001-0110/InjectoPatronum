@@ -1,9 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <PackageId>InjectoPatronum</PackageId>
+    <Authors>22</Authors>
+    <Description>Dependency injection</Description>
+    <Version>1.0.0</Version>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <LicenseUrl>https://creativecommons.org/licenses/by-nc/4.0/deed.en</LicenseUrl>
+    <RepositoryUrl>https://github.com/0001-0110/InjectoPatronum</RepositoryUrl>
   </PropertyGroup>
 
 </Project>
